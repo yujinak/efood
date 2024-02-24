@@ -2,13 +2,10 @@ import styled from 'styled-components'
 import { CORES } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
-import { Props } from '.'
-
-export const Card = styled.div<Props>`
+export const Card = styled.div`
   display: inline-block;
   margin-bottom: 48px;
-  background-color: ${(props) =>
-    props.type === 'Home' ? `${CORES.branco}` : `${CORES.vermelho}`};
+  background-color: ${CORES.branco};
   position: relative;
 
   ${TagContainer} {
@@ -35,26 +32,24 @@ export const Informacoes = styled.div`
   margin-top: 0;
 `
 
-export const Titulo = styled.div<Props>`
+export const Titulo = styled.div`
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
-  color: ${(props) =>
-    props.type === 'Home' ? `${CORES.vermelho}` : `${CORES.branco}`};
+  color: ${CORES.vermelho};
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
   padding-top: 8px;
 `
 
-export const Descricao = styled.p<Props>`
+export const Descricao = styled.p`
   font-size: 14px;
-  color: ${(props) =>
-    props.type === 'Home' ? `${CORES.vermelho}` : `${CORES.branco}`};
+  color: ${CORES.vermelho};
   margin-bottom: 16px;
 `
 
-// Defina os tipos para os elementos filhos
-Card.defaultProps = { as: 'div' }
-Titulo.defaultProps = { as: 'div' }
-Descricao.defaultProps = { as: 'p' }
+// // Defina os tipos para os elementos filhos
+// Card.defaultProps = { as: 'div', children: undefined } as any
+// Titulo.defaultProps = { as: 'div', children: undefined } as any
+// Descricao.defaultProps = { as: 'p', children: undefined } as any

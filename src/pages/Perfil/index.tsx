@@ -1,11 +1,13 @@
 import Banner from '../../components/Banner'
-import ListaItens from '../../components/ListaItens'
+import Header from '../../components/Header'
+import ListaPratos from '../../components/ListaPratos'
 import restauranteLaDolceVita from '../../data/ladolcevita'
 
 const Perfil = () => (
   <>
+    <Header type="Perfil" />
     <Banner type="Perfil" />
-    <ListaItens pratos={restauranteLaDolceVita} />
+    <ListaPratos pratos={restauranteLaDolceVita} />
   </>
 )
 

@@ -1,10 +1,10 @@
-import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import ListaRestaurantes from '../../components/ListaItens'
+import ListaRestaurantes from '../../components/ListaRestaurantes'
 import restaurantes from '../../data/restaurantes'
 
 const Home = () => (
   <>
+    <Header type="Home" />
     <ListaRestaurantes restaurantes={restaurantes} />
   </>
 )

@@ -3,14 +3,14 @@ import { CORES } from '../../styles'
 import { Props } from '.'
 
 export const TagContainer = styled.div<Props>`
-  display: ${(props) =>
+  display: ${(props: { type: string }) =>
     props.type === 'botaoCarrinho' ? 'block' : 'inline-block'};
   margin: 8px;
   padding: 6px 4px;
   text-align: center;
-  background-color: ${(props) =>
+  background-color: ${(props: { type: string }) =>
     props.type === 'botaoCarrinho' ? `${CORES.bege}` : `${CORES.vermelho}`};
-  color: ${(props) =>
+  color: ${(props: { type: string }) =>
     props.type === 'botaoCarrinho' ? `${CORES.vermelho}` : `${CORES.bege}`};
   font-weight: bold;
 `
