@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": false, //desliga formatação automática do VSCode
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  }
+}

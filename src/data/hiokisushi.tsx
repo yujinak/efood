@@ -30,6 +30,20 @@ const restauranteHiokiSushi: Prato[] = [
     imagem: sushi,
     descricao:
       'Um delicioso sushi de salmão, abacate e creamcheese, preparado de maneira invertida, com a alga por dentro.'
+  },
+  {
+    id: 5,
+    nome: 'Uramaki de Salmão',
+    imagem: sushi,
+    descricao:
+      'Um delicioso sushi de salmão, abacate e creamcheese, preparado de maneira invertida, com a alga por dentro.'
+  },
+  {
+    id: 6,
+    nome: 'Uramaki de Salmão',
+    imagem: sushi,
+    descricao:
+      'Um delicioso sushi de salmão, abacate e creamcheese, preparado de maneira invertida, com a alga por dentro.'
   }
 ]
 

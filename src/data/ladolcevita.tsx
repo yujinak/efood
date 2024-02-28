@@ -30,6 +30,20 @@ const restauranteLaDolceVita: Prato[] = [
     imagem: pizza,
     descricao:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+  },
+  {
+    id: 5,
+    nome: 'Pizza Marguerita',
+    imagem: pizza,
+    descricao:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+  },
+  {
+    id: 6,
+    nome: 'Pizza Marguerita',
+    imagem: pizza,
+    descricao:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   }
 ]
 

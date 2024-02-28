@@ -23,4 +23,10 @@ export const GlobalCSS = createGlobalStyle`
     background-color: ${CORES.creme};
     color: ${CORES.vermelho};
   }
+
+  .container{
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+  }
 `

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
 import imgFundo from '../../assets/images/fundo.png'
 
-import { Cabecalho, Logo } from './styles'
+import { CabecalhoHome, CabecalhoPerfil, Logo } from './styles'
 
 export type HeaderProps = {
   type: 'Home' | 'Perfil'
@@ -13,29 +13,29 @@ export type HeaderProps = {
 const Header = ({ type, carrinho = 0 }: HeaderProps) => {
   if (type === 'Home') {
     return (
-      <Cabecalho style={{ backgroundImage: `url(${imgFundo})` }}>
+      <CabecalhoHome style={{ backgroundImage: `url(${imgFundo})` }}>
         <Logo href="">
           <Link to="/">
-            <img src={logo} alt="" />
+            <img className="container" src={logo} alt="" />
           </Link>
         </Logo>
-      </Cabecalho>
+      </CabecalhoHome>
     )
   }
 
   return (
-    <Cabecalho style={{ backgroundImage: `url(${imgFundo})` }}>
+    <CabecalhoPerfil style={{ backgroundImage: `url(${imgFundo})` }}>
       <Link to="/">
         <h3>Restaurantes</h3>
       </Link>
 
       <Logo href="">
         <Link to="/">
-          <img src={logo} alt="" />
+          <img className="container" src={logo} alt="" />
         </Link>
       </Logo>
       <h3>{carrinho} produto(s) no carrinho</h3>
-    </Cabecalho>
+    </CabecalhoPerfil>
   )
 }
 

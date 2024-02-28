@@ -43,4 +43,7 @@ export const Descricao = styled.p`
 
 export const Botao = styled(Tag)`
   cursor: pointer;
+  borde
+
+  }
 `
