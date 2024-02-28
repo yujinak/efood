@@ -6,9 +6,9 @@ export type Props = {
   onClick?: () => void
 }
 
-const Tag = ({ children, type }: Props) => {
+const Tag = ({ children, type, onClick }: Props) => {
   if (type === 'botaoCarrinho') {
-    return <BotaoCarrinho>{children}</BotaoCarrinho>
+    return <BotaoCarrinho onClick={onClick}>{children}</BotaoCarrinho>
   }
   if (type === 'botaoSaibaMais') {
     return <BotaoSaibaMais>{children}</BotaoSaibaMais>

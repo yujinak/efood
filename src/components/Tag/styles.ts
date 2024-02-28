@@ -43,4 +43,5 @@ export const BotaoCarrinho = styled.button`
   padding: 6px 4px;
   text-align: center;
   font-weight: bold;
+  cursor: pointer;
 `
