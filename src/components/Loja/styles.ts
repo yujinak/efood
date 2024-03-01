@@ -7,10 +7,13 @@ export const Card = styled.div`
   margin-bottom: 48px;
   background-color: ${CORES.branco};
   position: relative;
+  width: 472px;
 
   ${TagContainer} {
     margin-top: 0;
     margin-right: 0;
+    line-height: 14px;
+    height: 26px;
   }
 
   .foto {
@@ -36,6 +39,7 @@ export const Titulo = styled.div`
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
+  height:
   color: ${CORES.vermelho};
   display: flex;
   justify-content: space-between;
@@ -47,9 +51,6 @@ export const Descricao = styled.p`
   font-size: 14px;
   color: ${CORES.vermelho};
   margin-bottom: 16px;
+  white-space: pre-line;
+  line-height: 22px;
 `
-
-// // Defina os tipos para os elementos filhos
-// Card.defaultProps = { as: 'div', children: undefined } as any
-// Titulo.defaultProps = { as: 'div', children: undefined } as any
-// Descricao.defaultProps = { as: 'p', children: undefined } as any

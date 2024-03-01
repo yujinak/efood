@@ -8,7 +8,8 @@ export const Slogan = styled.p`
   font-size: 36px;
   text-align: center;
   color: ${CORES.vermelho};
-  padding-bottom: 40px;
+  margin: 0 auto;
+  margin-top: 138px;
 `
 
 export const Apresentacao = styled.div`
@@ -23,7 +24,7 @@ export const Categoria = styled.h2`
   font-weight: lighter;
   font-size: 32px;
   color: ${CORES.branco};
-  padding: 24px 0 156px 170px;
+  padding: 24px 0 156px;
 `
 
 export const Nome = styled.h2`
@@ -31,5 +32,4 @@ export const Nome = styled.h2`
   font-size: 32px;
   color: ${CORES.branco};
   padding-bottom: 32px;
-  padding-left: 170px;
 `

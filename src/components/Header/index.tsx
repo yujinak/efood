@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '../../assets/images/logo.png'
 import imgFundo from '../../assets/images/fundo.png'
+import Banner from '../Banner'
 
 import { CabecalhoHome, CabecalhoPerfil, Logo } from './styles'
 
@@ -16,25 +17,29 @@ const Header = ({ type, carrinho = 0 }: HeaderProps) => {
       <CabecalhoHome style={{ backgroundImage: `url(${imgFundo})` }}>
         <Logo href="">
           <Link to="/">
-            <img className="container" src={logo} alt="" />
+            <img src={logo} alt="" />
           </Link>
         </Logo>
+        <Banner type={type} />
       </CabecalhoHome>
     )
   }
 
   return (
     <CabecalhoPerfil style={{ backgroundImage: `url(${imgFundo})` }}>
-      <Link to="/">
-        <h3>Restaurantes</h3>
-      </Link>
-
-      <Logo href="">
+      <div className="container">
         <Link to="/">
-          <img className="container" src={logo} alt="" />
+          <h3>Restaurantes</h3>
         </Link>
-      </Logo>
-      <h3>{carrinho} produto(s) no carrinho</h3>
+        <Logo href="">
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
+        </Logo>
+        <div>
+          <h3>{carrinho} produto(s) no carrinho</h3>
+        </div>
+      </div>
     </CabecalhoPerfil>
   )
 }

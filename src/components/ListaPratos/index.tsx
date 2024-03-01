@@ -7,17 +7,19 @@ export type Props = {
 }
 
 const ListaPratos = ({ pratos }: Props) => (
-  <Grid>
-    {pratos.map((prato) => (
-      <Item
-        key={prato.id}
-        descricao={prato.descricao}
-        imagem={prato.imagem}
-        nome={prato.nome}
-        id={prato.id}
-      />
-    ))}
-  </Grid>
+  <div className="container">
+    <Grid>
+      {pratos.map((prato) => (
+        <Item
+          key={prato.id}
+          descricao={prato.descricao}
+          imagem={prato.imagem}
+          nome={prato.nome}
+          id={prato.id}
+        />
+      ))}
+    </Grid>
+  </div>
 )
 
 export default ListaPratos
