@@ -29,7 +29,7 @@ const Header = ({ type, carrinho = 0 }: HeaderProps) => {
     <CabecalhoPerfil style={{ backgroundImage: `url(${imgFundo})` }}>
       <div className="container">
         <Link to="/">
-          <h3>Restaurantes</h3>
+          <h3 className="botaoRestaurantes">Restaurantes</h3>
         </Link>
         <Logo href="">
           <Link to="/">
@@ -37,7 +37,7 @@ const Header = ({ type, carrinho = 0 }: HeaderProps) => {
           </Link>
         </Logo>
         <div>
-          <h3>{carrinho} produto(s) no carrinho</h3>
+          <h3 className="carrinho">{carrinho} produto(s) no carrinho</h3>
         </div>
       </div>
     </CabecalhoPerfil>

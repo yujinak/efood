@@ -9,6 +9,6 @@ export const Grid = styled.ul`
 
   @media (max-width: 768px) {
     display: block;
-    margin: 0 15%;
+    margin: 0 25%;
   }
 `
