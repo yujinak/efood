@@ -1,9 +1,9 @@
-import Restaurante from '../../models/Restaurante'
+import { TipoRestaurante } from '../../models/tipo'
 import Item from '../Loja'
 import { Grid } from './styles'
 
 export type Props = {
-  restaurantes: Restaurante[]
+  restaurantes: TipoRestaurante[]
 }
 
 const ListaRestaurantes = ({ restaurantes }: Props) => (
@@ -12,21 +12,21 @@ const ListaRestaurantes = ({ restaurantes }: Props) => (
       {restaurantes.map(
         (restaurante: {
           id: number
-          categoria: string
+          tipo: string
           descricao: string
-          imagem: string
-          infos: string[]
-          nome: string
-          nota: number
+          capa: string
+          destacado: boolean
+          titulo: string
+          avaliacao: number
         }) => (
           <Item
             key={restaurante.id}
-            categoria={restaurante.categoria}
+            tipo={restaurante.tipo}
             descricao={restaurante.descricao}
-            imagem={restaurante.imagem}
-            infos={restaurante.infos}
-            nome={restaurante.nome}
-            nota={restaurante.nota}
+            capa={restaurante.capa}
+            destacado={restaurante.destacado}
+            titulo={restaurante.titulo}
+            avaliacao={restaurante.avaliacao}
             id={restaurante.id}
           />
         )

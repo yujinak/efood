@@ -4,10 +4,13 @@ import facebook from '../../assets/images/facebook.png'
 import twitter from '../../assets/images/twitter.png'
 
 import { Descricao, FooterSection, Logo, Redes } from './styles'
+import { Link } from 'react-router-dom'
 
 const Footer = () => (
   <FooterSection>
-    <Logo src={logo} alt="" />
+    <Link to={'/'}>
+      <Logo src={logo} alt="" />
+    </Link>
     <Redes>
       <li>
         <a href="">

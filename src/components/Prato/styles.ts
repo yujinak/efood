@@ -19,6 +19,7 @@ export const Card = styled.div`
 `
 export const Foto = styled.img`
   // margin-bottom: 8px;
+  height: 168px;
 `
 
 export const Informacoes = styled.div`

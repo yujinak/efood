@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { CORES } from '../../styles'
 
 export const CabecalhoHome = styled.header`
   background-size: cover;
@@ -18,6 +19,10 @@ export const CabecalhoPerfil = styled.header`
   justify-content: space-between;
   align-items: center;
   text-wrap: nowrap;
+
+  .botaoRestaurantes {
+    color: ${CORES.vermelho};
+  }
 
   .container {
     display: flex;

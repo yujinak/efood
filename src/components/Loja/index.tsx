@@ -1,47 +1,36 @@
 import { Link } from 'react-router-dom'
+
 import estrela from '../../assets/images/estrela.png'
 import Tag from '../Tag'
 import { Card, Descricao, Informacoes, Tags, Titulo } from './styles'
 
-export type LojaProps = {
-  categoria?: string
-  infos?: string[]
-  nota?: number
-  descricao: string
-  imagem: string
-  nome: string
-  id: number
-}
+import { TipoRestaurante } from '../../models/tipo'
 
 const Loja = ({
+  id,
+  destacado,
   descricao,
-  imagem,
-  nome,
-  infos,
-  nota,
-  categoria
-}: LojaProps) => {
+  capa,
+  titulo,
+  avaliacao,
+  tipo
+}: TipoRestaurante) => {
   return (
-    <Card>
-      <img className="foto" src={imagem} alt={nome} />
+    <Card to={`/restaurantes/${id}`}>
+      <img className="foto" src={capa} alt={titulo} />
       <Tags>
-        <Tag type="info">{categoria as string}</Tag>
-        {infos &&
-          infos.map((info) => (
-            <Tag key={info} type="info">
-              {info}
-            </Tag>
-          ))}
+        <Tag type="info">{tipo as string}</Tag>
+        {destacado ? <Tag type="info">Destaque da Semana</Tag> : null}
       </Tags>
       <Informacoes>
         <Titulo>
-          <h3>{nome}</h3>
+          <h3>{titulo}</h3>
           <h3>
-            {nota} <img src={estrela} alt="" />
+            {avaliacao} <img src={estrela} alt="" />
           </h3>
         </Titulo>
         <Descricao>{descricao}</Descricao>
-        <Link to={`/perfil`}>
+        <Link to={`/restaurantes/${id}`}>
           <Tag type="botaoSaibaMais">Saiba mais</Tag>
         </Link>
       </Informacoes>

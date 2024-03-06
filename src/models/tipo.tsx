@@ -9,11 +9,11 @@ export interface TipoPrato {
 
 export type TipoRestaurante = {
   id: number
-  name: string
+  titulo: string
   destacado: boolean
   tipo: string
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: TipoPrato[]
+  cardapio?: TipoPrato[]
 }
