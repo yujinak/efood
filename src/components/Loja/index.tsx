@@ -19,7 +19,7 @@ const Loja = ({
     <Card to={`/restaurantes/${id}`}>
       <img className="foto" src={capa} alt={titulo} />
       <Tags>
-        <Tag type="info">{tipo as string}</Tag>
+        <Tag type="info">{tipo}</Tag>
         {destacado ? <Tag type="info">Destaque da Semana</Tag> : null}
       </Tags>
       <Informacoes>

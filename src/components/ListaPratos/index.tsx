@@ -6,7 +6,6 @@ import { ModalBox, ModalContent, FotoPrato, Infos, Modal, Item } from './styles'
 
 import fechar from '../../assets/images/close.png'
 
-// import Item from '../Prato'
 import { Botao } from '../Prato/styles'
 import { Grid } from './styles'
 import Prato from '../Prato'
@@ -19,6 +18,13 @@ interface ModalState extends TipoPrato {
   estaVisivel: boolean
 }
 
+export const formatarPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
 const ListaPratos = ({ pratos }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     estaVisivel: false,
@@ -29,8 +35,6 @@ const ListaPratos = ({ pratos }: Props) => {
     porcao: '',
     descricao: ''
   })
-
-  const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
   const closeModal = () => {
     setModal({
@@ -60,7 +64,6 @@ const ListaPratos = ({ pratos }: Props) => {
                 porcao: prato.porcao,
                 descricao: prato.descricao
               })
-              setModalEstaAberto(true)
             }}
           >
             <Prato
@@ -76,8 +79,9 @@ const ListaPratos = ({ pratos }: Props) => {
           </Item>
         ))}
       </Grid>
-      {/* <Modal className={modal.estaVisivel ? 'visivel' : ''}>
-        <ModalBox className="container">
+
+      <Modal className={modal.estaVisivel ? 'visivel' : ''}>
+        <ModalBox>
           <header>
             <img src={fechar} alt="" onClick={() => closeModal()} />
           </header>
@@ -87,12 +91,12 @@ const ListaPratos = ({ pratos }: Props) => {
               <h2>{modal.nome}</h2>
               <p>{modal.descricao}</p>
               <p>Serve: de {modal.porcao}</p>
-              <Botao type="botaoCarrinho">Adicionar ao carrinho - R$</Botao>
+              <Botao type="botaoModal">{`Adicionar ao carrinho - ${formatarPreco(modal.preco)}`}</Botao>
             </Infos>
           </ModalContent>
         </ModalBox>
-     <div className="overlay" onClick={() => closeModal()}></div>
-      </Modal> */}
+        <div className="overlay" onClick={() => closeModal()}></div>
+      </Modal>
     </div>
   )
 }

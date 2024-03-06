@@ -1,8 +1,13 @@
-import { TagContainer, BotaoSaibaMais, BotaoCarrinho } from './styles'
+import {
+  TagContainer,
+  BotaoSaibaMais,
+  BotaoCarrinho,
+  BotaoModal
+} from './styles'
 
 export type Props = {
-  type: 'info' | 'botaoSaibaMais' | 'botaoCarrinho'
-  children: string
+  type: 'info' | 'botaoSaibaMais' | 'botaoCarrinho' | 'botaoModal'
+  children: string | number
   onClick?: () => void
 }
 
@@ -12,6 +17,10 @@ const Tag = ({ children, type, onClick }: Props) => {
   }
   if (type === 'botaoSaibaMais') {
     return <BotaoSaibaMais>{children}</BotaoSaibaMais>
+  }
+
+  if (type === 'botaoModal') {
+    return <BotaoModal>{children}</BotaoModal>
   }
 
   return <TagContainer>{children}</TagContainer>

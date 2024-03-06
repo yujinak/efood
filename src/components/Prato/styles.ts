@@ -6,7 +6,7 @@ import Tag from '../Tag'
 
 export const Card = styled.div`
   display: inline-block;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   width: 320px;
   background-color: ${CORES.vermelho};
   position: relative;

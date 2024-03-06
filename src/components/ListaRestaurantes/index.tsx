@@ -21,7 +21,7 @@ const ListaRestaurantes = ({ restaurantes }: Props) => (
         }) => (
           <Item
             key={restaurante.id}
-            tipo={restaurante.tipo}
+            tipo={restaurante.tipo.slice(0)}
             descricao={restaurante.descricao}
             capa={restaurante.capa}
             destacado={restaurante.destacado}

@@ -1,12 +1,12 @@
 import { Apresentacao, Categoria, Nome, Slogan } from './styles'
 
-import dadosRestaurantes from '../../data/restaurantes'
-
 type Props = {
   type: 'Home' | 'Perfil'
+  titulo?: string
+  tipo?: string
 }
 
-const Banner = ({ type }: Props) => {
+const Banner = ({ type, titulo, tipo }: Props) => {
   if (type === 'Home') {
     return (
       <Slogan>
@@ -20,8 +20,10 @@ const Banner = ({ type }: Props) => {
   return (
     <Apresentacao>
       <div className="container">
-        <Categoria>{dadosRestaurantes[2].categoria}</Categoria>
-        <Nome>{dadosRestaurantes[2].nome}</Nome>
+        <Categoria>
+          {tipo ? tipo?.slice(0, 1).toUpperCase() + tipo?.slice(1) : null}
+        </Categoria>
+        <Nome>{titulo}</Nome>
       </div>
     </Apresentacao>
   )

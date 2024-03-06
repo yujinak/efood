@@ -4,7 +4,7 @@ import { CORES } from '../../styles'
 export const FooterSection = styled.footer`
   text-align: center;
   padding: 40px;
-  margin: 0 auto;
+  margin: 70px auto 0;
   background-color: ${CORES.bege};
 `
 export const Logo = styled.img`

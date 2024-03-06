@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
-import { BotaoCarrinho } from '../Tag/styles'
-
 import { CORES } from '../../styles'
+import Tag from '../Tag'
 
 export const Grid = styled.ul`
   display: grid;
@@ -31,7 +30,7 @@ export const Modal = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
-  // display: none;
+  display: none;
   align-items: center;
   justify-content: center;
 
@@ -42,7 +41,6 @@ export const Modal = styled.div`
   }
 
   .overlay {
-    z-index: 999;
     position: absolute;
     top: 0;
     left: 0;
@@ -57,6 +55,7 @@ export const ModalBox = styled.div`
   z-index: 1;
   padding: 8px;
   margin: 490px auto;
+  max-width: 1024px;
 
   header {
     display: flex;
@@ -70,7 +69,6 @@ export const ModalBox = styled.div`
 
 export const ModalContent = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 24px;
 `
@@ -78,6 +76,10 @@ export const ModalContent = styled.div`
 export const Infos = styled.div`
   margin-left: 24px;
 
+  h3 {
+    font-size: 18px;
+    line-height: 22px;
+  }
   p {
     margin: 16px 0;
     font-size: 14px;
@@ -91,9 +93,6 @@ export const FotoPrato = styled.img`
   width: 280px;
 `
 
-export const Botao = styled(BotaoCarrinho)`
+export const Botao = styled(Tag)`
   display: block;
-  padding: 4px;
-  width: auto;
-  margin-bottom: 31px;
 `
