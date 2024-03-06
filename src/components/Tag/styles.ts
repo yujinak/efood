@@ -1,19 +1,6 @@
 import styled from 'styled-components'
 import { CORES } from '../../styles'
 
-// export const TagContainer = styled.div<Props>`
-//   display: ${(props: { type: string }) =>
-//     props.type === 'botaoCarrinho' ? 'block' : 'inline-block'};
-//   margin: 8px;
-//   padding: 6px 4px;
-//   text-align: center;
-//   background-color: ${(props: { type: string }) =>
-//     props.type === 'botaoCarrinho' ? `${CORES.bege}` : `${CORES.vermelho}`};
-//   color: ${(props: { type: string }) =>
-//     props.type === 'botaoCarrinho' ? `${CORES.vermelho}` : `${CORES.bege}`};
-//   font-weight: bold;
-// `
-
 export const TagContainer = styled.div`
   display: inline-block;
   padding: 6px 4px;

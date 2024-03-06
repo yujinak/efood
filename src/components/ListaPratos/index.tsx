@@ -1,9 +1,10 @@
-import Prato from '../../models/Prato'
+import { TipoPrato } from '../../models/tipo'
+
 import Item from '../Prato'
 import { Grid } from './styles'
 
-export type Props = {
-  pratos: Prato[]
+type Props = {
+  pratos: TipoPrato[]
 }
 
 const ListaPratos = ({ pratos }: Props) => (
@@ -13,7 +14,7 @@ const ListaPratos = ({ pratos }: Props) => (
         <Item
           key={prato.id}
           descricao={prato.descricao}
-          imagem={prato.imagem}
+          foto={prato.foto}
           nome={prato.nome}
           id={prato.id}
         />

@@ -1,22 +1,17 @@
 import { Botao, Card, Descricao, Foto, Informacoes, Titulo } from './styles'
 
-export type PratoProps = {
-  descricao: string
-  imagem: string
-  nome: string
-  id: number
-}
+import { TipoPrato } from '../../models/tipo'
 
-const Prato = ({ descricao, imagem, nome }: PratoProps) => {
+const Prato = ({ descricao, foto, nome }: TipoPrato) => {
   return (
     <Card>
-      <Foto className="foto" src={imagem} alt={nome} />
+      <Foto className="foto" src={foto} alt={nome} />
       <Informacoes>
         <Titulo>
           <h3>{nome}</h3>
         </Titulo>
         <Descricao>{descricao}</Descricao>
-        <Botao type="botaoCarrinho">Adicionar ao carrinho</Botao>
+        <Botao type="botaoCarrinho">Mais detalhes</Botao>
       </Informacoes>
     </Card>
   )
