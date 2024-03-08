@@ -58,6 +58,7 @@ export const ModalBox = styled.div`
   max-width: 1024px;
 
   header {
+    padding: 0;
     display: flex;
     justify-content: end;
 
@@ -70,7 +71,7 @@ export const ModalBox = styled.div`
 export const ModalContent = styled.div`
   display: flex;
   justify-content: center;
-  padding: 24px;
+  padding: 8px 24px 24px 24px;
 `
 
 export const Infos = styled.div`
