@@ -35,7 +35,7 @@ export const CartItem = styled.li`
   padding: 8px;
   margin-bottom: 16px;
   display: flex;
-  // position: relative;
+  position: relative;
 
   > img {
     width: 80px;
@@ -68,7 +68,7 @@ export const ValorTotal = styled.div`
   color: ${CORES.bege};
   font-size: 14px;
   font-weight: bold;
-  margin-top: 24px;
+  margin-top: 40px;
 `
 
 export const Botao = styled.button`

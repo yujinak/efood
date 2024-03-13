@@ -94,6 +94,17 @@ export const FotoPrato = styled.img`
   width: 280px;
 `
 
-export const Botao = styled(Tag)`
+export const BotaoModal = styled.button`
+  justify-content: center;
+  background-color: ${CORES.bege};
+  color: ${CORES.vermelho};
+  border: none;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+
   display: block;
+  padding: 6px 4px;
+  width: auto;
+  margin-bottom: 31px;
 `

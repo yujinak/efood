@@ -3,11 +3,18 @@ import { useState } from 'react'
 
 import { TipoPrato } from '../../models/tipo'
 
-import { ModalBox, ModalContent, FotoPrato, Infos, Modal, Item } from './styles'
+import {
+  ModalBox,
+  ModalContent,
+  FotoPrato,
+  Infos,
+  Modal,
+  Item,
+  BotaoModal
+} from './styles'
 
 import fechar from '../../assets/images/close.png'
 
-import { Botao } from '../Prato/styles'
 import { Grid } from './styles'
 import Prato from '../Prato'
 
@@ -21,7 +28,7 @@ interface ModalState extends TipoPrato {
   estaVisivel: boolean
 }
 
-export const formatarPreco = (preco = 0) => {
+export const formatarPreco = function (preco = 0) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
@@ -30,8 +37,18 @@ export const formatarPreco = (preco = 0) => {
 
 const ListaPratos = ({ pratos }: Props) => {
   const dispatch = useDispatch()
+
   const addToCart = () => {
-    dispatch(add(modal))
+    const item: TipoPrato = {
+      preco: modal.preco,
+      id: modal.id,
+      foto: modal.foto,
+      nome: modal.nome,
+      descricao: modal.descricao,
+      porcao: modal.porcao
+    }
+    console.log(item)
+    dispatch(add(item))
     dispatch(open())
     closeModal()
   }
@@ -74,6 +91,7 @@ const ListaPratos = ({ pratos }: Props) => {
                 porcao: prato.porcao,
                 descricao: prato.descricao
               })
+              console.log(modal)
             }}
           >
             <Prato
@@ -105,9 +123,9 @@ const ListaPratos = ({ pratos }: Props) => {
               <h2>{modal.nome}</h2>
               <p>{modal.descricao}</p>
               <p>Serve: de {modal.porcao}</p>
-              <Botao type="botaoModal" onClick={addToCart}>
+              <BotaoModal onClick={addToCart}>
                 {`Adicionar ao carrinho - ${formatarPreco(modal.preco)}`}
-              </Botao>
+              </BotaoModal>
             </Infos>
           </ModalContent>
         </ModalBox>

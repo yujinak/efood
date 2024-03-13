@@ -6,20 +6,20 @@ import {
 } from './styles'
 
 export type Props = {
-  type: 'info' | 'botaoSaibaMais' | 'botaoCarrinho' | 'botaoModal'
+  tipo: 'info' | 'botaoSaibaMais' | 'botaoCarrinho' | 'botaoModal'
   children: string | number
   onClick?: () => void
 }
 
-const Tag = ({ children, type, onClick }: Props) => {
-  if (type === 'botaoCarrinho') {
+const Tag = ({ children, tipo, onClick }: Props) => {
+  if (tipo === 'botaoCarrinho') {
     return <BotaoCarrinho onClick={onClick}>{children}</BotaoCarrinho>
   }
-  if (type === 'botaoSaibaMais') {
+  if (tipo === 'botaoSaibaMais') {
     return <BotaoSaibaMais>{children}</BotaoSaibaMais>
   }
 
-  if (type === 'botaoModal') {
+  if (tipo === 'botaoModal') {
     return <BotaoModal>{children}</BotaoModal>
   }
 

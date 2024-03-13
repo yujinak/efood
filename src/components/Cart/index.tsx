@@ -33,29 +33,33 @@ const Cart = () => {
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />
       <Sidebar>
-        <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
-              <img src={item.foto} alt={item.nome} />
-              <div>
-                <h3>{item.nome}</h3>
-                <span>{formatarPreco(item.preco)}</span>
-                <img
-                  className="lixeira"
-                  src={lixeira}
-                  alt="Remover item da lista"
-                  onClick={() => removeItem(item.id)}
-                />
-              </div>
-            </CartItem>
-          ))}
+        {items.length === 0 ? (
+          <CartItem>Nenhum prato na lista!</CartItem>
+        ) : (
+          <ul>
+            {items.map((item) => (
+              <CartItem key={item.id}>
+                <img src={item.foto} alt={item.nome} />
+                <div>
+                  <h3>{item.nome}</h3>
+                  <span>{formatarPreco(item.preco)}</span>
+                  <img
+                    className="lixeira"
+                    src={lixeira}
+                    alt="Remover item da lista"
+                    onClick={() => removeItem(item.id)}
+                  />
+                </div>
+              </CartItem>
+            ))}
+          </ul>
+        )}
 
-          <ValorTotal>
-            <span>Valor total</span>
-            <span>{formatarPreco(getTotalPrice())}</span>
-          </ValorTotal>
-          <Botao>Continuar com a entrega</Botao>
-        </ul>
+        <ValorTotal>
+          <span>Valor total</span>
+          <span>{formatarPreco(getTotalPrice())}</span>
+        </ValorTotal>
+        <Botao>Continuar com a entrega</Botao>
       </Sidebar>
     </CartContainer>
   )

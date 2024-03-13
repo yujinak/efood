@@ -11,7 +11,7 @@ const Prato = ({ descricao, foto, nome }: TipoPrato) => {
           <h3>{nome}</h3>
         </Titulo>
         <Descricao>{descricao}</Descricao>
-        <Botao type="botaoCarrinho">Mais detalhes</Botao>
+        <Botao tipo="botaoCarrinho">Mais detalhes</Botao>
       </Informacoes>
     </Card>
   )
