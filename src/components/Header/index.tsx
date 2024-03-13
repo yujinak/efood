@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import logo from '../../assets/images/logo.png'
 import imgFundo from '../../assets/images/fundo.png'
@@ -6,12 +7,21 @@ import Banner from '../Banner'
 
 import { CabecalhoHome, CabecalhoPerfil, Logo } from './styles'
 
+import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
+
 export type HeaderProps = {
   type: 'Home' | 'Perfil'
-  carrinho?: number
 }
 
-const Header = ({ type, carrinho = 0 }: HeaderProps) => {
+const Header = ({ type }: HeaderProps) => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
   if (type === 'Home') {
     return (
       <CabecalhoHome style={{ backgroundImage: `url(${imgFundo})` }}>
@@ -37,7 +47,9 @@ const Header = ({ type, carrinho = 0 }: HeaderProps) => {
           </Link>
         </Logo>
         <div>
-          <h3 className="carrinho">{carrinho} produto(s) no carrinho</h3>
+          <h3 className="carrinho" onClick={openCart}>
+            {items.length} produto(s) no carrinho
+          </h3>
         </div>
       </div>
     </CabecalhoPerfil>

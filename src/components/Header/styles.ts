@@ -20,8 +20,9 @@ export const CabecalhoPerfil = styled.header`
   align-items: center;
   text-wrap: nowrap;
 
-  .botaoRestaurantes {
+  h3 {
     color: ${CORES.vermelho};
+    cursor: pointer;
   }
 
   .container {

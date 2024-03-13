@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { CORES } from '../../styles'
-import dadosRestaurantes from '../../data/restaurantes'
 
 export const Slogan = styled.p`
   font-weight: bold;
@@ -13,11 +12,10 @@ export const Slogan = styled.p`
 `
 
 export const Apresentacao = styled.div`
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(${dadosRestaurantes[2].imagem});
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
   margin-bottom: 56px;
+  position: relative;
 `
 
 export const Categoria = styled.h2`

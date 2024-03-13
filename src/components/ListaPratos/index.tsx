@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
 import { TipoPrato } from '../../models/tipo'
@@ -9,6 +10,8 @@ import fechar from '../../assets/images/close.png'
 import { Botao } from '../Prato/styles'
 import { Grid } from './styles'
 import Prato from '../Prato'
+
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
   pratos: TipoPrato[]
@@ -26,11 +29,18 @@ export const formatarPreco = (preco = 0) => {
 }
 
 const ListaPratos = ({ pratos }: Props) => {
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch(add(modal))
+    dispatch(open())
+    closeModal()
+  }
+
   const [modal, setModal] = useState<ModalState>({
     estaVisivel: false,
-    foto: '',
     preco: 0,
     id: 0,
+    foto: '',
     nome: '',
     porcao: '',
     descricao: ''
@@ -39,9 +49,9 @@ const ListaPratos = ({ pratos }: Props) => {
   const closeModal = () => {
     setModal({
       estaVisivel: false,
-      foto: '',
       preco: 0,
       id: 0,
+      foto: '',
       nome: '',
       porcao: '',
       descricao: ''
@@ -83,7 +93,11 @@ const ListaPratos = ({ pratos }: Props) => {
       <Modal className={modal.estaVisivel ? 'visivel' : ''}>
         <ModalBox>
           <header>
-            <img src={fechar} alt="" onClick={() => closeModal()} />
+            <img
+              src={fechar}
+              alt="Clique para fechar"
+              onClick={() => closeModal()}
+            />
           </header>
           <ModalContent>
             <FotoPrato src={modal.foto} alt={modal.nome} />
@@ -91,7 +105,9 @@ const ListaPratos = ({ pratos }: Props) => {
               <h2>{modal.nome}</h2>
               <p>{modal.descricao}</p>
               <p>Serve: de {modal.porcao}</p>
-              <Botao type="botaoModal">{`Adicionar ao carrinho - ${formatarPreco(modal.preco)}`}</Botao>
+              <Botao type="botaoModal" onClick={addToCart}>
+                {`Adicionar ao carrinho - ${formatarPreco(modal.preco)}`}
+              </Botao>
             </Infos>
           </ModalContent>
         </ModalBox>
