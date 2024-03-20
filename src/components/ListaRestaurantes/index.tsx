@@ -1,4 +1,3 @@
-import { TipoRestaurante } from '../../models/tipo'
 import Item from '../Loja'
 import { Grid } from './styles'
 

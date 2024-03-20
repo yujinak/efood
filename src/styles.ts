@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const CORES = {
-  branco: '#ffffff',
-  vermelho: '#E66767',
-  bege: '#FFEBD9',
-  dourado: '#FFB930',
-  creme: '#FFF8F2'
+export const COLORS = {
+  white: '#ffffff',
+  red: '#E66767',
+  beige: '#FFEBD9',
+  gold: '#FFB930',
+  cream: '#FFF8F2'
 }
 
 export const GlobalCSS = createGlobalStyle`
@@ -20,8 +20,8 @@ export const GlobalCSS = createGlobalStyle`
   }
 
   body{
-    background-color: ${CORES.creme};
-    color: ${CORES.vermelho};
+    background-color: ${COLORS.cream};
+    color: ${COLORS.red};
   }
 
   .container{

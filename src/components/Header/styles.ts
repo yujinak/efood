@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CORES } from '../../styles'
+import { COLORS } from '../../styles'
 
 export const CabecalhoHome = styled.header`
   background-size: cover;
@@ -21,7 +21,7 @@ export const CabecalhoPerfil = styled.header`
   text-wrap: nowrap;
 
   h3 {
-    color: ${CORES.vermelho};
+    color: ${COLORS.red};
     cursor: pointer;
   }
 

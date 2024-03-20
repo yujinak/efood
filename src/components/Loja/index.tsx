@@ -4,8 +4,6 @@ import estrela from '../../assets/images/estrela.png'
 import Tag from '../Tag'
 import { Card, Descricao, Informacoes, Tags, Titulo } from './styles'
 
-import { TipoRestaurante } from '../../models/tipo'
-
 const Loja = ({
   id,
   destacado,

@@ -33,7 +33,7 @@ const Perfil = () => {
         titulo={restaurante.titulo}
       />
       <ListaPratos pratos={restaurante.cardapio!} />
-      <Cart></Cart>
+      <Cart />
     </>
   )
 }

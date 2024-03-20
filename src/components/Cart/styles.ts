@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { CORES } from '../../styles'
+import { COLORS } from '../../styles'
+
+type RowProps = {
+  columnGap?: string
+}
+
+type InputGroupProps = {
+  maxWidth?: string
+}
 
 export const Overlay = styled.div`
   background-color: rgb(0, 0, 0, 0.7);
@@ -23,15 +31,23 @@ export const CartContainer = styled.div`
 `
 
 export const Sidebar = styled.aside`
-  background-color: ${CORES.vermelho};
+  background-color: ${COLORS.red};
   height: 100%;
   width: 360px;
   padding: 32px 8px;
   z-index: 1;
 `
 
+export const CartBox = styled.div`
+  display: auto;
+
+  &.visible {
+    display: none;
+  }
+`
+
 export const CartItem = styled.li`
-  background-color: ${CORES.bege};
+  background-color: ${COLORS.beige};
   padding: 8px;
   margin-bottom: 16px;
   display: flex;
@@ -60,12 +76,13 @@ export const CartItem = styled.li`
     position: absolute;
     right: 0;
     bottom: 0;
+    cursor: pointer;
   }
 `
 export const ValorTotal = styled.div`
   display: flex;
   justify-content: space-between;
-  color: ${CORES.bege};
+  color: ${COLORS.beige};
   font-size: 14px;
   font-weight: bold;
   margin-top: 40px;
@@ -78,6 +95,72 @@ export const Botao = styled.button`
   font-size: 14px;
   font-weight: bold;
   margin-top: 16px;
-  color: ${CORES.vermelho};
-  background-color: ${CORES.bege};
+  color: ${COLORS.red};
+  background-color: ${COLORS.beige};
+`
+
+export const Form = styled.form`
+  color: ${COLORS.beige};
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+`
+
+export const Title = styled.h4`
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+`
+
+export const FormGroup = styled.div`
+  margin-bottom: 18px;
+`
+
+export const Row = styled.div<RowProps>`
+  display: flex;
+  column-gap: ${(props) => props.columnGap || 'auto'};
+`
+
+export const InputGroup = styled.div<InputGroupProps>`
+  flex: auto;
+  max-width: ${(props) => props.maxWidth || 'auto'};
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  input {
+    background-color: ${COLORS.beige};
+    border: none;
+    width: 100%;
+    color: 14px;
+    height: 32px;
+    margin: 8px 0;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 14px;
+
+    &.error {
+      border: 1px solid ${COLORS.gold};
+    }
+  }
+`
+
+export const Button = styled.button`
+  width: 100%;
+  height: 24px;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: ${COLORS.red};
+  background-color: ${COLORS.beige};
+`
+export const Message = styled.p`
+  font-size: 14px;
+  margin-bottom: 14px;
 `

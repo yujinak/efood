@@ -1,8 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
-import { TipoPrato } from '../../models/tipo'
-
 import {
   ModalBox,
   ModalContent,
@@ -47,7 +45,6 @@ const ListaPratos = ({ pratos }: Props) => {
       descricao: modal.descricao,
       porcao: modal.porcao
     }
-    console.log(item)
     dispatch(add(item))
     dispatch(open())
     closeModal()
@@ -91,7 +88,6 @@ const ListaPratos = ({ pratos }: Props) => {
                 porcao: prato.porcao,
                 descricao: prato.descricao
               })
-              console.log(modal)
             }}
           >
             <Prato
