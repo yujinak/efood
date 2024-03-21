@@ -78,6 +78,19 @@ export const CartItem = styled.li`
     bottom: 0;
     cursor: pointer;
   }
+
+  &.vazio {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+
+    > h3 {
+      margin-bottom: 8px;
+    }
+  }
 `
 export const ValorTotal = styled.div`
   display: flex;
@@ -88,24 +101,8 @@ export const ValorTotal = styled.div`
   margin-top: 40px;
 `
 
-export const Botao = styled.button`
-  width: 100%;
-  height: 24px;
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 16px;
-  color: ${COLORS.red};
-  background-color: ${COLORS.beige};
-`
-
 export const Form = styled.form`
   color: ${COLORS.beige};
-  display: none;
-
-  &.visible {
-    display: block;
-  }
 `
 
 export const Title = styled.h4`
@@ -116,6 +113,11 @@ export const Title = styled.h4`
 
 export const FormGroup = styled.div`
   margin-bottom: 18px;
+  display: none;
+
+  &.visible {
+    display: block;
+  }
 `
 
 export const Row = styled.div<RowProps>`
@@ -145,9 +147,13 @@ export const InputGroup = styled.div<InputGroupProps>`
     font-size: 14px;
 
     &.error {
-      border: 1px solid ${COLORS.gold};
+      background-color: ${COLORS.gold};
     }
   }
+`
+
+export const ButtonBox = styled.div`
+  margin-top: 16px;
 `
 
 export const Button = styled.button`
@@ -159,7 +165,14 @@ export const Button = styled.button`
   margin-bottom: 8px;
   color: ${COLORS.red};
   background-color: ${COLORS.beige};
+  cursor: pointer;
 `
+
+export const Checkout = styled.div`
+  color: ${COLORS.beige};
+  margin-bottom: 10px;
+`
+
 export const Message = styled.p`
   font-size: 14px;
   margin-bottom: 14px;

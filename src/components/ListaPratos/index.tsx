@@ -1,39 +1,26 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
-import {
-  ModalBox,
-  ModalContent,
-  FotoPrato,
-  Infos,
-  Modal,
-  Item,
-  BotaoModal
-} from './styles'
+import * as S from './styles'
 
 import fechar from '../../assets/images/close.png'
 
-import { Grid } from './styles'
+import Loader from '../Loader'
 import Prato from '../Prato'
+import { formatPrice } from '../utils'
 
 import { add, open } from '../../store/reducers/cart'
 
 type Props = {
-  pratos: TipoPrato[]
+  pratos?: TipoPrato[]
+  isLoading: boolean
 }
 
 interface ModalState extends TipoPrato {
   estaVisivel: boolean
 }
 
-export const formatarPreco = function (preco = 0) {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
-
-const ListaPratos = ({ pratos }: Props) => {
+const ListaPratos = ({ pratos, isLoading }: Props) => {
   const dispatch = useDispatch()
 
   const addToCart = () => {
@@ -72,40 +59,45 @@ const ListaPratos = ({ pratos }: Props) => {
     })
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <div className="container">
-      <Grid>
-        {pratos.map((prato) => (
-          <Item
-            key={prato.id}
-            onClick={() => {
-              setModal({
-                estaVisivel: true,
-                foto: prato.foto,
-                preco: prato.preco,
-                id: prato.id,
-                nome: prato.nome,
-                porcao: prato.porcao,
-                descricao: prato.descricao
-              })
-            }}
-          >
-            <Prato
-              foto={prato.foto}
-              id={prato.id}
-              nome={prato.nome}
-              descricao={
-                prato.descricao.length > 100
-                  ? `${prato.descricao.slice(0, 200)}...`
-                  : prato.descricao
-              }
-            />
-          </Item>
-        ))}
-      </Grid>
+      <S.Grid>
+        {pratos &&
+          pratos.map((prato) => (
+            <S.Item
+              key={prato.id}
+              onClick={() => {
+                setModal({
+                  estaVisivel: true,
+                  foto: prato.foto,
+                  preco: prato.preco,
+                  id: prato.id,
+                  nome: prato.nome,
+                  porcao: prato.porcao,
+                  descricao: prato.descricao
+                })
+              }}
+            >
+              <Prato
+                foto={prato.foto}
+                id={prato.id}
+                nome={prato.nome}
+                descricao={
+                  prato.descricao.length > 100
+                    ? `${prato.descricao.slice(0, 200)}...`
+                    : prato.descricao
+                }
+              />
+            </S.Item>
+          ))}
+      </S.Grid>
 
-      <Modal className={modal.estaVisivel ? 'visivel' : ''}>
-        <ModalBox>
+      <S.Modal className={modal.estaVisivel ? 'visivel' : ''}>
+        <S.ModalBox>
           <header>
             <img
               src={fechar}
@@ -113,20 +105,20 @@ const ListaPratos = ({ pratos }: Props) => {
               onClick={() => closeModal()}
             />
           </header>
-          <ModalContent>
-            <FotoPrato src={modal.foto} alt={modal.nome} />
-            <Infos>
+          <S.ModalContent>
+            <S.FotoPrato src={modal.foto} alt={modal.nome} />
+            <S.Infos>
               <h2>{modal.nome}</h2>
               <p>{modal.descricao}</p>
               <p>Serve: de {modal.porcao}</p>
-              <BotaoModal onClick={addToCart}>
-                {`Adicionar ao carrinho - ${formatarPreco(modal.preco)}`}
-              </BotaoModal>
-            </Infos>
-          </ModalContent>
-        </ModalBox>
+              <S.BotaoModal onClick={addToCart}>
+                {`Adicionar ao carrinho - ${formatPrice(modal.preco)}`}
+              </S.BotaoModal>
+            </S.Infos>
+          </S.ModalContent>
+        </S.ModalBox>
         <div className="overlay" onClick={() => closeModal()}></div>
-      </Modal>
+      </S.Modal>
     </div>
   )
 }

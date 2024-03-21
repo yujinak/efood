@@ -2,17 +2,15 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Navigate } from 'react-router-dom'
+import ReactInputMask from 'react-input-mask'
 
 import { usePurchaseMutation } from '../../services/api'
-
-import * as S from './styles'
-
 import { RootReducer } from '../../store'
 import { clear, close, remove } from '../../store/reducers/cart'
 
+import * as S from './styles'
 import lixeira from '../../assets/images/lixeira-de-reciclagem 1.png'
-import { formatarPreco } from '../ListaPratos'
+import { formatPrice, getTotalPrice } from '../utils'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -21,19 +19,14 @@ const Cart = () => {
   const closeCart = () => dispatch(close())
 
   const [whichForm, setWhichForm] = useState('cart')
-  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess }] = usePurchaseMutation()
 
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
-
-  const getTotalPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!)
-    }, 0)
-  }
 
   const finished = () => {
     dispatch(clear())
     setWhichForm('cart')
+    closeCart()
   }
 
   const form = useFormik({
@@ -43,14 +36,14 @@ const Cart = () => {
       deliveryAddress: '',
       deliveryCity: '',
       deliveryCep: '',
-      deliveryNumber: 0,
+      deliveryNumber: '',
       deliveryComplement: '',
       // Campos de cartão
       cardName: '',
       cardNumber: '',
-      cardCode: 0,
-      expireMonth: 0,
-      expireYear: 0
+      cardCode: '',
+      expireMonth: '',
+      expireYear: ''
     },
     validationSchema: Yup.object({
       // Campos de entrega
@@ -58,36 +51,36 @@ const Cart = () => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       deliveryAddress: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(5, 'O endereço precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       deliveryCity: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(3, 'A cidade precisa ter pelo menos 3 caracteres')
         .required('O campo é obrigatório'),
       deliveryCep: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(9, 'O CEP precisa ter 9 caracteres')
         .required('O campo é obrigatório'),
       deliveryNumber: Yup.number()
-        .min(5, 'O número precisa ter pelo menos 1 caractere')
+        .min(2, 'O número precisa ter pelo menos 2 caractere')
         .required('O campo é obrigatório'),
       deliveryComplement: Yup.string().min(
         5,
-        'O nome precisa ter pelo menos 5 caracteres'
+        'O complemento precisa ter pelo menos 5 caracteres'
       ),
       // Campos de cartão
       cardName: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(5, 'O nome do cartão precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       cardNumber: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(18, 'O número do cartão precisa ter 15 ou 16 caracteres')
         .required('O campo é obrigatório'),
       cardCode: Yup.number()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(3, 'O CVV precisa ter 3 dígitos')
         .required('O campo é obrigatório'),
       expireMonth: Yup.number()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(2, 'O mês de vencimento precisa ter 2 dígitos')
         .required('O campo é obrigatório'),
       expireYear: Yup.number()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(4, 'O ano de vencimento precisa ter 4 dígitos')
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
@@ -103,7 +96,7 @@ const Cart = () => {
             description: values.deliveryAddress,
             city: values.deliveryCity,
             zipCode: values.deliveryCep,
-            number: values.deliveryNumber,
+            number: Number(values.deliveryNumber),
             complement: values.deliveryComplement
           }
         },
@@ -111,10 +104,10 @@ const Cart = () => {
           card: {
             name: values.cardName,
             number: values.cardNumber,
-            code: values.cardCode,
+            code: Number(values.cardCode),
             expires: {
-              month: values.expireMonth,
-              year: values.expireYear
+              month: Number(values.expireMonth),
+              year: Number(values.expireYear)
             }
           }
         }
@@ -136,9 +129,9 @@ const Cart = () => {
         <S.Overlay onClick={closeCart} />
         <S.Sidebar>
           {isSuccess && data ? (
-            <S.Form className={whichForm === 'checkout' ? 'visible' : ''}>
-              <S.FormGroup>
-                <S.Title>Pedido realizado - ORDER_ID</S.Title>
+            <S.Checkout>
+              <S.FormGroup className="visible checkout">
+                <S.Title>Pedido realizado - {data.orderId}</S.Title>
                 <S.Message>
                   Estamos felizes em informar que seu pedido já está em processo
                   de preparação e, em breve, será entregue no endereço
@@ -161,35 +154,56 @@ const Cart = () => {
               <S.Button type="button" onClick={finished}>
                 Concluir
               </S.Button>
-            </S.Form>
+            </S.Checkout>
           ) : (
             <>
               <S.CartBox className={whichForm === 'cart' ? '' : 'visible'}>
-                <ul>
-                  {items.map((item) => (
-                    <S.CartItem key={item.id}>
-                      <img src={item.foto} alt={item.nome} />
-                      <div>
-                        <h3>{item.nome}</h3>
-                        <span>{formatarPreco(item.preco)}</span>
-                        <img
-                          className="lixeira"
-                          src={lixeira}
-                          alt="Remover item da lista"
-                          onClick={() => removeItem(item.id)}
-                        />
-                      </div>
-                    </S.CartItem>
-                  ))}
-                </ul>
-
-                <S.ValorTotal>
-                  <span>Valor total</span>
-                  <span>{formatarPreco(getTotalPrice())}</span>
-                </S.ValorTotal>
-                <S.Botao onClick={() => setWhichForm('delivery')}>
-                  Continuar com a entrega
-                </S.Botao>
+                {items.length === 0 ? (
+                  <S.CartItem onClick={closeCart} className="vazio">
+                    <h3>Ops, o carrinho está vazio! 🛒</h3>
+                    <span>
+                      Adicione um prato ao carrinho para continuar com a compra
+                      😋
+                    </span>
+                  </S.CartItem>
+                ) : (
+                  <>
+                    <ul>
+                      {items.map((item) => (
+                        <S.CartItem key={item.id}>
+                          <img src={item.foto} alt={item.nome} />
+                          <div>
+                            <h3>{item.nome}</h3>
+                            <span>{formatPrice(item.preco)}</span>
+                            <img
+                              className="lixeira"
+                              src={lixeira}
+                              alt="Remover item da lista"
+                              onClick={() => removeItem(item.id)}
+                            />
+                          </div>
+                        </S.CartItem>
+                      ))}
+                    </ul>
+                    <S.ValorTotal>
+                      <span>Valor total</span>
+                      <span>{formatPrice(getTotalPrice(items))}</span>
+                    </S.ValorTotal>
+                    <S.ButtonBox>
+                      <S.Button
+                        onClick={() => {
+                          items.length >= 1
+                            ? setWhichForm('delivery')
+                            : alert(
+                                'Adicione pelo menos um prato para continuar!'
+                              )
+                        }}
+                      >
+                        Continuar com a entrega
+                      </S.Button>
+                    </S.ButtonBox>
+                  </>
+                )}
               </S.CartBox>
 
               <S.Form onSubmit={form.handleSubmit}>
@@ -202,6 +216,7 @@ const Cart = () => {
                     <input
                       type="text"
                       id="deliveryWho"
+                      name="deliveryWho"
                       value={form.values.deliveryWho}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
@@ -215,6 +230,7 @@ const Cart = () => {
                     <input
                       type="text"
                       id="deliveryAddress"
+                      name="deliveryAddress"
                       value={form.values.deliveryAddress}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
@@ -228,6 +244,7 @@ const Cart = () => {
                     <input
                       type="text"
                       id="deliveryCity"
+                      name="deliveryCity"
                       value={form.values.deliveryCity}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
@@ -239,12 +256,14 @@ const Cart = () => {
                   <S.Row columnGap="34px">
                     <S.InputGroup>
                       <label htmlFor="deliveryCep">CEP</label>
-                      <input
+                      <ReactInputMask
                         type="text"
                         id="deliveryCep"
+                        name="deliveryCep"
                         value={form.values.deliveryCep}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="99999-999"
                         className={
                           checkInputHasError('deliveryCep') ? 'error' : ''
                         }
@@ -255,6 +274,7 @@ const Cart = () => {
                       <input
                         type="text"
                         id="deliveryNumber"
+                        name="deliveryNumber"
                         value={form.values.deliveryNumber}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
@@ -271,6 +291,7 @@ const Cart = () => {
                     <input
                       type="text"
                       id="deliveryComplement"
+                      name="deliveryComplement"
                       value={form.values.deliveryComplement}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
@@ -279,24 +300,39 @@ const Cart = () => {
                       }
                     />
                   </S.InputGroup>
+                  <S.ButtonBox>
+                    <S.Button
+                      type="button"
+                      onClick={() => {
+                        setWhichForm('payment')
+                      }}
+                    >
+                      Continuar com o pagamento
+                    </S.Button>
+                    <S.Button
+                      type="button"
+                      onClick={() => {
+                        setWhichForm('cart')
+                      }}
+                    >
+                      Voltar para o carrinho
+                    </S.Button>
+                  </S.ButtonBox>
                 </S.FormGroup>
-
-                <S.Button type="button" onClick={() => setWhichForm('payment')}>
-                  Continuar com o pagamento
-                </S.Button>
-                <S.Button type="button" onClick={() => setWhichForm('cart')}>
-                  Voltar para o carrinho
-                </S.Button>
 
                 <S.FormGroup
                   className={whichForm === 'payment' ? 'visible' : ''}
                 >
-                  <S.Title>Pagamento - Valor a pagar R$ 190,90</S.Title>
+                  <S.Title>
+                    Pagamento - Valor a pagar{' '}
+                    {formatPrice(getTotalPrice(items))}
+                  </S.Title>
                   <S.InputGroup>
                     <label htmlFor="cardName">Nome no cartão</label>
                     <input
                       type="text"
                       id="cardName"
+                      name="cardName"
                       value={form.values.cardName}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
@@ -307,12 +343,14 @@ const Cart = () => {
                   <S.Row columnGap="30px">
                     <S.InputGroup maxWidth="228px">
                       <label htmlFor="cardNumber">Número do cartão</label>
-                      <input
+                      <ReactInputMask
                         type="text"
                         id="cardNumber"
+                        name="cardNumber"
                         value={form.values.cardNumber}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="9999 9999 9999 9999"
                         className={
                           checkInputHasError('cardNumber') ? 'error' : ''
                         }
@@ -320,12 +358,14 @@ const Cart = () => {
                     </S.InputGroup>
                     <S.InputGroup maxWidth="87px">
                       <label htmlFor="cardCode">CVV</label>
-                      <input
+                      <ReactInputMask
                         type="text"
                         id="cardCode"
+                        name="cardCode"
                         value={form.values.cardCode}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="999"
                         className={
                           checkInputHasError('cardCode') ? 'error' : ''
                         }
@@ -335,12 +375,14 @@ const Cart = () => {
                   <S.Row columnGap="34px">
                     <S.InputGroup>
                       <label htmlFor="expireMonth">Mês de vencimento</label>
-                      <input
+                      <ReactInputMask
                         type="text"
                         id="expireMonth"
+                        name="expireMonth"
                         value={form.values.expireMonth}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="99"
                         className={
                           checkInputHasError('expireMonth') ? 'error' : ''
                         }
@@ -348,31 +390,38 @@ const Cart = () => {
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="expireYear">Ano de vencimento</label>
-                      <input
+                      <ReactInputMask
                         type="text"
                         id="expireYear"
+                        name="expireYear"
                         value={form.values.expireYear}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        mask="9999"
                         className={
                           checkInputHasError('expireYear') ? 'error' : ''
                         }
                       />
                     </S.InputGroup>
                   </S.Row>
+                  <S.ButtonBox>
+                    <S.Button
+                      type="submit"
+                      disabled={!form.isValid}
+                      onClick={() => form.handleSubmit}
+                    >
+                      Finalizar pagamento
+                    </S.Button>
+                    <S.Button
+                      type="button"
+                      onClick={() => {
+                        setWhichForm('delivery')
+                      }}
+                    >
+                      Voltar para a edição de endereço
+                    </S.Button>
+                  </S.ButtonBox>
                 </S.FormGroup>
-                <S.Button
-                  type="submit"
-                  onClick={() => setWhichForm('checkout')}
-                >
-                  Finalizar pagamento
-                </S.Button>
-                <S.Button
-                  type="button"
-                  onClick={() => setWhichForm('delivery')}
-                >
-                  Voltar para a edição de endereço
-                </S.Button>
               </S.Form>
             </>
           )}

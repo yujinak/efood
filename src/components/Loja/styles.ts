@@ -39,6 +39,7 @@ export const Informacoes = styled.div`
   border-top: none;
   padding: 0 8px 8px;
   margin-top: 0;
+  height: 218px;
 `
 
 export const Titulo = styled.div`
