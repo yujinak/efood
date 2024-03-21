@@ -1,4 +1,4 @@
-export interface TipoPrato {
+declare interface TipoPrato {
   foto: string
   preco?: number
   id: number
@@ -7,7 +7,7 @@ export interface TipoPrato {
   porcao?: string
 }
 
-export type TipoRestaurante = {
+declare type TipoRestaurante = {
   id: number
   titulo: string
   destacado: boolean

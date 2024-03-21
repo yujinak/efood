@@ -7,19 +7,22 @@ import ListaPratos from '../../components/ListaPratos'
 import { useParams } from 'react-router-dom'
 import { useGetRestauranteQuery } from '../../services/api'
 
-import spinner from '../../assets/spinner.gif'
 import Cart from '../../components/Cart'
+import Loader from '../../components/Loader'
+
+type PerfilParams = {
+  id: string
+}
 
 const Perfil = () => {
-  const { id } = useParams()
+  const { id } = useParams() as PerfilParams
 
-  const { data: restaurante } = useGetRestauranteQuery(id!)
+  const { data: restaurante, isLoading } = useGetRestauranteQuery(id)
 
   if (!restaurante) {
     return (
       <>
-        <h4>Carregando...</h4>
-        <img src={spinner} alt="" />
+        <Loader />
       </>
     )
   }
@@ -32,8 +35,8 @@ const Perfil = () => {
         tipo={restaurante.tipo}
         titulo={restaurante.titulo}
       />
-      <ListaPratos pratos={restaurante.cardapio!} />
-      <Cart></Cart>
+      <ListaPratos isLoading={isLoading} pratos={restaurante.cardapio} />
+      <Cart />
     </>
   )
 }

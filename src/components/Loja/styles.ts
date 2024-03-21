@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
-import { CORES } from '../../styles'
+import { COLORS } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled(Link)`
   display: inline-block;
   margin-bottom: 48px;
-  background-color: ${CORES.branco};
+  background-color: ${COLORS.white};
   position: relative;
   // max-width: 472px;
   // max-height: 450px;
@@ -35,10 +35,11 @@ export const Tags = styled.div`
 `
 
 export const Informacoes = styled.div`
-  border: 1px solid ${CORES.vermelho};
+  border: 1px solid ${COLORS.red};
   border-top: none;
   padding: 0 8px 8px;
   margin-top: 0;
+  height: 218px;
 `
 
 export const Titulo = styled.div`
@@ -51,13 +52,13 @@ export const Titulo = styled.div`
   padding-top: 8px;
 
   > h3 {
-    color: ${CORES.vermelho};
+    color: ${COLORS.red};
   }
 `
 
 export const Descricao = styled.p`
   font-size: 14px;
-  color: ${CORES.vermelho};
+  color: ${COLORS.red};
   margin-bottom: 16px;
   white-space: pre-line;
   line-height: 22px;

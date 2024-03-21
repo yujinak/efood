@@ -1,7 +1,5 @@
 import { Botao, Card, Descricao, Foto, Informacoes, Titulo } from './styles'
 
-import { TipoPrato } from '../../models/tipo'
-
 const Prato = ({ descricao, foto, nome }: TipoPrato) => {
   return (
     <Card>

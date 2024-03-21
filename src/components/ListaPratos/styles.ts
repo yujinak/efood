@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { CORES } from '../../styles'
+import { COLORS } from '../../styles'
 
 export const Grid = styled.ul`
   display: grid;
@@ -33,7 +33,7 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  color: ${CORES.branco};
+  color: ${COLORS.white};
 
   &.visivel {
     display: flex;
@@ -50,7 +50,7 @@ export const Modal = styled.div`
 `
 
 export const ModalBox = styled.div`
-  background-color: ${CORES.vermelho};
+  background-color: ${COLORS.red};
   z-index: 1;
   padding: 8px;
   margin: 490px auto;
@@ -95,8 +95,8 @@ export const FotoPrato = styled.img`
 
 export const BotaoModal = styled.button`
   justify-content: center;
-  background-color: ${CORES.bege};
-  color: ${CORES.vermelho};
+  background-color: ${COLORS.beige};
+  color: ${COLORS.red};
   border: none;
   text-align: center;
   font-weight: bold;

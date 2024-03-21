@@ -29,7 +29,7 @@ const Banner = ({ type, titulo, tipo }: Props) => {
   return (
     <Apresentacao
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${restaurante!.capa})`
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${restaurante ? restaurante.capa : ''})`
       }}
     >
       <div className="container">

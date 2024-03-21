@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { CORES } from '../../styles'
+import { COLORS } from '../../styles'
 
 export const FooterSection = styled.footer`
   text-align: center;
   padding: 40px;
   margin: 70px auto 0;
-  background-color: ${CORES.bege};
+  background-color: ${COLORS.beige};
 `
 export const Logo = styled.img`
   margin-bottom: 32px;
