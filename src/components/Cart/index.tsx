@@ -62,7 +62,3 @@ const Cart = () => {
         <Botao>Continuar com a entrega</Botao>
       </Sidebar>
     </CartContainer>
-  )
-}
-
-export default Cart

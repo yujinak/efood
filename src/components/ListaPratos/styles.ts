@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { CORES } from '../../styles'
-import Tag from '../Tag'
 
 export const Grid = styled.ul`
   display: grid;
